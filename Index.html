@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Digital Clock</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <style>
+        body {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .clock {
+            color: #ffffff;
+            font-size: 120px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 10px;
+            text-align: center;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="MyClockDisplay" class="clock"></div>
+    <script>
+        function showTime() {
+            let date = new Date();
+            let h = date.getHours(); // 0 - 23
+            let m = date.getMinutes(); // 0 - 59
+            let s = date.getSeconds(); // 0 - 59
+            let session = "AM";
+
+            if (h == 0) {
+                h = 12;
+            }
+
+            if (h > 12) {
+                h = h - 12;
+                session = "PM";
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            let time = h + ":" + m + ":" + s + " " + session;
+
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+
+            setTimeout(showTime, 1000);
+        }
+
+        showTime();
+    </script>
+</body>
+</html>
