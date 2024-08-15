@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .bonus-info {
+            margin-bottom: 16px;
+            padding: 10px;
+            background-color: #e0ffe0;
+            border: 1px solid #b0ffb0;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <div class="bonus-info">
+            Sign up now and get ₹50 bonus!
+        </div>
+        <form id="signup-form">
+            <label for="phone">Mobile Number:</label>
+            <input type="text" id="phone" name="phone" required>
+            <button type="button" onclick="sendOTP()">Send OTP</button>
+        </form>
+
+        <form id="otp-form" style="display: none;">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+            <button type="button" onclick="verifyOTP()">Verify OTP</button>
+        </form>
+
+        <form id="forgot-password-form" style="display: none;">
+            <label for="forgot-phone">Enter Mobile Number:</label>
+            <input type="text" id="forgot-phone" name="forgot-phone" required>
+            <button type="button" onclick="sendResetLink()">Send Reset Link</button>
+        </form>
+
+        <p><a href="#" onclick="toggleForgotPassword()">Forgot Password?</a></p>
+    </div>
+
+    <script>
+        function sendOTP() {
+            const phone = document.getElementById('phone').value;
+            // Simulate OTP sending
+            alert(`OTP sent to ${phone}`);
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('otp-form').style.display = 'block';
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('otp').value;
+            // Simulate OTP verification
+            if (otp) {
+                alert('OTP verified! Your ₹50 bonus has been applied.');
+                // Redirect or show success message
+            } else {
+                alert('Invalid OTP');
+            }
+        }
+
+        function sendResetLink() {
+            const phone = document.getElementById('forgot-phone').value;
+            // Simulate sending password reset link
+            alert(`Password reset link sent to ${phone}`);
+        }
+
+        function toggleForgotPassword() {
+            const form = document.getElementById('forgot-password-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
