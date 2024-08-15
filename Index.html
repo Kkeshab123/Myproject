@@ -1,62 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Digital Clock</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-    <style>
-        body {
-            background: linear-gradient(90deg, #1e3c72, #2a5298);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+// App.js
+import React from 'react';
+import './App.css'; // Import CSS for styling
 
-        .clock {
-            color: #ffffff;
-            font-size: 120px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            letter-spacing: 10px;
-            text-align: center;
-            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-    </style>
-</head>
-<body>
-    <div id="MyClockDisplay" class="clock"></div>
-    <script>
-        function showTime() {
-            let date = new Date();
-            let h = date.getHours(); // 0 - 23
-            let m = date.getMinutes(); // 0 - 59
-            let s = date.getSeconds(); // 0 - 59
-            let session = "AM";
+const ProductCard = ({ product }) => {
+  return (
+    <div className="product-card">
+      <img src={product.image} alt={product.title} className="product-image" />
+      <div className="product-info">
+        <h2 className="product-title">{product.title}</h2>
+        <p className="product-description">{product.description}</p>
+        <span className="product-price">${product.price}</span>
+        <button className="add-to-cart-button">Add to Cart</button>
+      </div>
+    </div>
+  );
+};
 
-            if (h == 0) {
-                h = 12;
-            }
+const App = () => {
+  const products = [
+    {
+      id: 1,
+      title: 'Men’s Leather Casual Loafers',
+      description: 'Comfortable and stylish leather loafers.',
+      price: 79.99,
+      image: 'path/to/image1.jpg'
+    },
+    // Add more products as needed
+  ];
 
-            if (h > 12) {
-                h = h - 12;
-                session = "PM";
-            }
+  return (
+    <div className="app">
+      <h1>Product List</h1>
+      <div className="product-list">
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-            h = (h < 10) ? "0" + h : h;
-            m = (m < 10) ? "0" + m : m;
-            s = (s < 10) ? "0" + s : s;
-
-            let time = h + ":" + m + ":" + s + " " + session;
-
-            document.getElementById("MyClockDisplay").innerText = time;
-            document.getElementById("MyClockDisplay").textContent = time;
-
-            setTimeout(showTime, 1000);
-        }
-
-        showTime();
-    </script>
-</body>
-</html>
+export default App;
