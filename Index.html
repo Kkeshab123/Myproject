@@ -3,98 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Registration Form</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
         }
-        .calculator {
-            border: 1px solid #ccc;
+
+        .container {
+            background-color: white;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
-        .display {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            font-size: 2em;
-            text-align: right;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
         }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
+
+        .form-group {
+            margin-bottom: 15px;
         }
-        .btn {
-            background-color: #eee;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
             border: none;
-            padding: 20px;
-            font-size: 1.5em;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.2s;
         }
-        .btn:hover {
-            background-color: #ddd;
-        }
-        .btn:active {
-            background-color: #ccc;
+
+        button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button class="btn" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="appendToDisplay('/')">/</button>
-            <button class="btn" onclick="appendToDisplay('*')">*</button>
-            <button class="btn" onclick="appendToDisplay('-')">-</button>
-            <button class="btn" onclick="appendToDisplay('7')">7</button>
-            <button class="btn" onclick="appendToDisplay('8')">8</button>
-            <button class="btn" onclick="appendToDisplay('9')">9</button>
-            <button class="btn" onclick="appendToDisplay('+')">+</button>
-            <button class="btn" onclick="appendToDisplay('4')">4</button>
-            <button class="btn" onclick="appendToDisplay('5')">5</button>
-            <button class="btn" onclick="appendToDisplay('6')">6</button>
-            <button class="btn" onclick="calculateResult()">=</button>
-            <button class="btn" onclick="appendToDisplay('1')">1</button>
-            <button class="btn" onclick="appendToDisplay('2')">2</button>
-            <button class="btn" onclick="appendToDisplay('3')">3</button>
-            <button class="btn" onclick="appendToDisplay('.')">.</button>
-            <button class="btn" onclick="appendToDisplay('0')">0</button>
-        </div>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="login">Login Icon:</label>
+                <input type="text" id="login" name="login" required>
+            </div>
+            <div class="form-group">
+                <label for="fatherName">Father's Name:</label>
+                <input type="text" id="fatherName" name="fatherName" required>
+            </div>
+            <div class="form-group">
+                <label for="motherName">Mother's Name:</label>
+                <input type="text" id="motherName" name="motherName" required>
+            </div>
+            <div class="form-group">
+                <label for="idProof">ID Proof:</label>
+                <input type="text" id="idProof" name="idProof" required>
+            </div>
+            <div class="form-group">
+                <label for="townVillage">Town/Village:</label>
+                <input type="text" id="townVillage" name="townVillage" required>
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="nationality">Nationality:</label>
+                <input type="text" id="nationality" name="nationality" required>
+            </div>
+            <div class="form-group">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" name="profession" required>
+            </div>
+            <div class="form-group">
+                <label for="work">Work:</label>
+                <input type="text" id="work" name="work" required>
+            </div>
+            <div class="form-group">
+                <label for="education">Education:</label>
+                <input type="text" id="education" name="education" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District:</label>
+                <input type="text" id="district" name="district" required>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" name="pincode" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
+
     <script>
-        function appendToDisplay(value) {
-            const display = document.getElementById('display');
-            if (display.innerText === '0' && value !== '/') {
-                display.innerText = value;
-            } else {
-                display.innerText += value;
-            }
-        }
-
-        function clearDisplay() {
-            document.getElementById('display').innerText = '0';
-        }
-
-        function calculateResult() {
-            const display = document.getElementById('display');
-            try {
-                display.innerText = eval(display.innerText) || '0';
-            } catch {
-                display.innerText = 'Error';
-            }
-        }
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Form submitted successfully!');
+        });
     </script>
 </body>
 </html>
+            
