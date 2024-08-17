@@ -1,133 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f7f7f7;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream11 Team Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 400px;
-            width: 100%;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: #fff;
-        }
+    .container {
+      width: 80%;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      margin: 5px 0;
+      background-color: #eaeaea;
+      border-radius: 4px;
+    }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
 
-        p {
-            text-align: center;
-        }
-
-        .bonus-info {
-            margin-bottom: 16px;
-            padding: 10px;
-            background-color: #e0ffe0;
-            border: 1px solid #b0ffb0;
-            border-radius: 4px;
-            text-align: center;
-        }
-    </style>
+    button:hover:not(:disabled) {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Sign Up</h1>
-        <div class="bonus-info">
-            Sign up now and get ₹50 bonus!
-        </div>
-        <form id="signup-form">
-            <label for="phone">Mobile Number:</label>
-            <input type="text" id="phone" name="phone" required>
-            <button type="button" onclick="sendOTP()">Send OTP</button>
-        </form>
+  <div class="container">
+    <h1>Select Your Team</h1>
+    <ul id="player-list">
+      <!-- Players will be listed here dynamically -->
+    </ul>
+    <button id="proceed-btn" disabled>Proceed</button>
+  </div>
 
-        <form id="otp-form" style="display: none;">
-            <label for="otp">Enter OTP:</label>
-            <input type="text" id="otp" name="otp" required>
-            <button type="button" onclick="verifyOTP()">Verify OTP</button>
-        </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const players = [
+        'Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5',
+        'Player 6', 'Player 7', 'Player 8', 'Player 9', 'Player 10', 'Player 11'
+      ];
 
-        <form id="forgot-password-form" style="display: none;">
-            <label for="forgot-phone">Enter Mobile Number:</label>
-            <input type="text" id="forgot-phone" name="forgot-phone" required>
-            <button type="button" onclick="sendResetLink()">Send Reset Link</button>
-        </form>
+      const playerList = document.getElementById('player-list');
+      const proceedBtn = document.getElementById('proceed-btn');
 
-        <p><a href="#" onclick="toggleForgotPassword()">Forgot Password?</a></p>
-    </div>
+      let selectedPlayers = [];
 
-    <script>
-        function sendOTP() {
-            const phone = document.getElementById('phone').value;
-            // Simulate OTP sending
-            alert(`OTP sent to ${phone}`);
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('otp-form').style.display = 'block';
+      // Function to render players
+      function renderPlayers() {
+        playerList.innerHTML = '';
+        players.forEach((player, index) => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `
+            ${player}
+            <input type="checkbox" data-index="${index}">
+          `;
+          playerList.appendChild(listItem);
+        });
+      }
+
+      // Event listener for checkbox change
+      playerList.addEventListener('change', function(e) {
+        const index = e.target.dataset.index;
+        if (e.target.checked) {
+          selectedPlayers.push(players[index]);
+        } else {
+          selectedPlayers = selectedPlayers.filter(p => p !== players[index]);
         }
 
-        function verifyOTP() {
-            const otp = document.getElementById('otp').value;
-            // Simulate OTP verification
-            if (otp) {
-                alert('OTP verified! Your ₹50 bonus has been applied.');
-                // Redirect or show success message
-            } else {
-                alert('Invalid OTP');
-            }
-        }
+        proceedBtn.disabled = selectedPlayers.length !== 11;
+      });
 
-        function sendResetLink() {
-            const phone = document.getElementById('forgot-phone').value;
-            // Simulate sending password reset link
-            alert(`Password reset link sent to ${phone}`);
-        }
+      // Event listener for proceed button
+      proceedBtn.addEventListener('click', function() {
+        alert(`You have selected: \n${selectedPlayers.join('\n')}`);
+      });
 
-        function toggleForgotPassword() {
-            const form = document.getElementById('forgot-password-form');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
+      // Initialize the player list
+      renderPlayers();
+    });
+  </script>
 </body>
 </html>
+            
